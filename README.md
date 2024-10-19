@@ -8,5 +8,6 @@
 
 ### Simplemente clona este repositorio en tu computadora y una vez realizado, sigue las instrucciones detalladas en el video. Esto con el fin de evitar errores y poder obtener un bot funcional completamente.
 
+# https://youtu.be/VOfRawr4z50
 
 ## Ante cualquier problema, puedes contactar conmigo mediante Discord! Link en mi Perfil.
