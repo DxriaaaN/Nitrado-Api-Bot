@@ -32,20 +32,17 @@ function initializeNitradoBot(client, gameServer) {
     client.on('messageCreate', async (message) => {
         if (message.author.bot) return;
 
-        //const adminServer = '1296865098463449119'; Comprueba Rol Autorizado (Remplazar por ID Rol)
-       //const canalConsola = '1296440024195141686'; Comprueba Canal de Comandos (Remplazar por ID canal Comandos)
-		//const canalAnuncios = '1294050449925869609'; Comprueba Canal de Anuncios (Remplazar por ID del canal donde ira el comando !setupembed)
+        //Las siguientes lineas corresponden a una verificacion extra de seguridad.
+        //Lo que debes hacer es en adminServer, remplazar la ID existente, por la ID del rol que va a ser encargado de los comandos.
 
-        //Una vez completado lo de arriba, descomenta la linea de aca abajo
-       //	const autorizacionCanal = (message.channel.id !== canalConsola || (message.content === '!setupembed' && message.channel.id === canalAnuncios)); 
-			
-        //Esta tambien.
-		// if (!autorizacionCanal) return;
+
+        //const adminServer = '1296865098463449119'; ---> Aca Remplaza la ID de tu rol.
+     
+        //No olvides descomentar aca abajo para que funcione la verificacion.        
         
-        
-        if (!message.member.roles.cache.has(adminServer)) {
-            return;
-        };
+       // if (!message.member.roles.cache.has(adminServer)) {
+         //   return;
+        //};
 
         const { content } = message;
         if (content === '!ping') {
@@ -123,9 +120,11 @@ async function handleSetupEmbedCommand(gameServer, message) {
 
         const players = await gameServer.getOnlinePlayers();
 
-        //Usalo para cambiar la Imagen del Embed.
-        const imagenPrendido = "https://media.discordapp.net/attachments/1293535320595239026/1296872832411893801/INICIANDOSE.jpg?ex=6713de71&is=67128cf1&hm=b3bdfaf327bb895723757c6c07a10137f3c5ef52af4e07d54017a9351a3ddd44&=&format=webp&width=550&height=289";
-        const imagenApagado = "https://media.discordapp.net/attachments/1293535320595239026/1296872690736435230/APAGADO.jpg?ex=6713de50&is=67128cd0&hm=8b63c393789ce1fa5abee0bd92b3b8d433f005f6b329ca03efb2a29f9df668a6&=&format=webp&width=624&height=468";
+        //Usalo para cambiar la Imagen del Embed 
+        //Encendido o Apagado
+
+        const imagenPrendido = ""; //---> Inserta la URL de la imagen para cuando el servidor esta prendido
+        const imagenApagado = "";  //---> Inserta la URL de la imagen para cuando el servidor esta apagado
 
         const embed = new EmbedBuilder()
             .setColor('313850')
@@ -200,8 +199,8 @@ async function updateEmbedMessages(client, gameServer) {
                 const message = await channel.messages.fetch(embed.messageId);
 
                 //Si cambiaste la imagen arriba, aca tambien debes hacerlo.
-                const imagenPrendido = "https://media.discordapp.net/attachments/1293535320595239026/1296872832411893801/INICIANDOSE.jpg?ex=6713de71&is=67128cf1&hm=b3bdfaf327bb895723757c6c07a10137f3c5ef52af4e07d54017a9351a3ddd44&=&format=webp&width=550&height=289";
-                const imagenApagado = "https://media.discordapp.net/attachments/1293535320595239026/1296872690736435230/APAGADO.jpg?ex=6713de50&is=67128cd0&hm=8b63c393789ce1fa5abee0bd92b3b8d433f005f6b329ca03efb2a29f9df668a6&=&format=webp&width=624&height=468";
+                const imagenPrendido = ""; //---> Inserta la URL de la imagen para cuando el servidor esta prendido
+                const imagenApagado = "";   //---> Inserta la URL de la imagen para cuando el servidor esta apagado
 
                 if (message) {
                     var statusEs = "";
@@ -224,7 +223,7 @@ async function updateEmbedMessages(client, gameServer) {
                     const newEmbed = new EmbedBuilder()
                         .setColor('313850')
                         .setTitle("Estado del servidor")
-                        .setDescription(`Ahora Mismo: ${statusEs}\nJugadores Activos: ${players.length}`)
+                        .setDescription(`Servidor: \n\nAhora Mismo: ${statusEs}\n\nJugadores Activos: ${players.length}`) // ---> Donde dice "Servidor: " Incluye el nombre de tu servidor. 
                         .setImage(status === 'started' ? imagenPrendido : imagenApagado)
                         .setTimestamp();
 
